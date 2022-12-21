@@ -1,0 +1,17 @@
+.box1 {
+  display: block;
+}
+
+.box2 {
+  display: none;
+}
+
+
+
+.wrapper:hover .box1 {
+  display: none;
+}
+
+.wrapper:hover .box2 {
+  display: block;
+}

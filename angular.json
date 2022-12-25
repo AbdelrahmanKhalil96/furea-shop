@@ -26,12 +26,18 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/fontawesome/css/brands.css",
+              "src/assets/fontawesome/css/solid.css",
+              "src/assets/fontawesome/css/fontawesome.css",
               "src/styles.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist//umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/fontawesome/js/brands.js",
+              "src/assets/fontawesome/js/solid.js",
+              "src/assets/fontawesome/js/fontawesome.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },

@@ -2,7 +2,6 @@ import { Component, Inject , EventEmitter, Output,OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DOCUMENT } from '@angular/common';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-logout',
@@ -11,11 +10,8 @@ import { Router } from '@angular/router';
 })
 export class UserLogoutComponent{
 
-  constructor(private activeModal: NgbActiveModal, private router: Router , private auth: AuthService,
+  constructor(private activeModal: NgbActiveModal,  private auth: AuthService,
     @Inject(DOCUMENT) private doc: Document,) {}
-    public href: string = "";
-  @Output() logout = new EventEmitter<string>();
-
 
   closeModal() {
     this.activeModal.close('Modal Closed');
@@ -23,9 +19,5 @@ export class UserLogoutComponent{
   handleLogout(): void {
     this.auth.logout({ returnTo: this.doc.location.origin });
   }
-  ngOnInit() {
-  this.href = this.router.url;
-    this.logout.emit(this.href);
 
-}
 }

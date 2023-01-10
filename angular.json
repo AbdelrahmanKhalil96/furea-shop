@@ -32,13 +32,13 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist//umd/popper.min.js",
+
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "src/assets/fontawesome/js/brands.js",
               "src/assets/fontawesome/js/solid.js",
               "src/assets/fontawesome/js/fontawesome.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "node_modules/popper.js/dist//umd/popper.min.js",
+              "node_modules/jquery/dist/jquery.min.js"
             ]
           },
           "configurations": {
@@ -69,6 +69,12 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "sslKey": "cert/CA/localhost/localhost.decrypted.key",
+            "sslCert": "cert/CA/localhost/localhost.crt",
+            "ssl": false
+
+        },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {

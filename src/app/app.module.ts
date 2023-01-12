@@ -15,6 +15,10 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { MainPageComponent } from './main-page/main-page.component';
 import { PageLoaderComponent } from './page-loader/page-loader.component';
 import { UserLogoutComponent } from './user-logout/user-logout.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { CartComponent } from './cart/cart.component';
+import { ShopComponent } from './shop/shop.component';
 
 
 @NgModule({
@@ -30,7 +34,11 @@ import { UserLogoutComponent } from './user-logout/user-logout.component';
     UserRegisterComponent,
     MainPageComponent,
     PageLoaderComponent,
-    UserLogoutComponent
+    UserLogoutComponent,
+    AboutComponent,
+    ContactComponent,
+    CartComponent,
+    ShopComponent
   ],
   imports: [
     BrowserModule,

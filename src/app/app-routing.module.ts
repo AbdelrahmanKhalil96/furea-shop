@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { CartComponent } from './cart/cart.component';
+import { ContactComponent } from './contact/contact.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { ShopComponent } from './shop/shop.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserLogoutComponent } from './user-logout/user-logout.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -23,8 +27,27 @@ const routes: Routes = [
     component:UserRegisterComponent,
     pathMatch: 'full'
   },
-
   {
+    path: 'about',
+    component:AboutComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'contact',
+    component:ContactComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'my-cart',
+    component:CartComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'All-Products',
+    component:ShopComponent,
+    pathMatch: 'full'
+  },
+    {
     path: 'logout',
     component:UserLogoutComponent,
     pathMatch: 'full'

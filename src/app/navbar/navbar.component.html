@@ -20,16 +20,14 @@
           <a class="nav-link" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="Shop">Shop</a>
+          <a class="nav-link" routerLink="/All-Products">Shop</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="#">Shop</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact Us</a>
+          <a class="nav-link" routerLink="/contact">Contact Us</a>
         </li>
 
 
@@ -49,7 +47,7 @@
               <a routerLink="/profile"><i class="fa-solid fa-user"></i></a>
               </li>
               <li class="nav-item col  ms-3">
-              <a href="#"> <i class="fa-solid fa-cart-shopping"></i></a>
+              <a routerLink="/my-cart"> <i class="fa-solid fa-cart-shopping"></i></a>
               </li>
               <li class="nav-item col  ms-3">
                 <a  [routerLink]="[currentUrl]" (click)="openLogoutModal()">

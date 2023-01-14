@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static FureaAPI.Models.CoreDbContext;
 
 namespace FureaAPI.Models
 {
@@ -26,8 +27,33 @@ namespace FureaAPI.Models
             return await _context.Products.ToListAsync();
         }
 
-        // GET: api/Products/5
-        [HttpGet("{id}")]
+
+    [HttpGet("/ProdSpecified/")]
+    public IEnumerable<ProdData> GetUser()
+    {
+      var ProdWithNames = (from a in _context.Products
+                      join c in _context.Categories on a.Id equals c.Id
+                      orderby a.Id descending
+                      select new ProdData
+                      {
+                        id = a.Id,
+                        name = a.Name,
+             categoryName=c.Name,
+     description=a.Description,
+     price=a.Price,
+     oldPrice= (double)a.OldPrice,
+ image =a.Image}).ToList();
+
+                      
+      return ProdWithNames;
+      //await _context.User.ToListAsync();
+    }
+
+
+
+
+    // GET: api/Products/5
+    [HttpGet("{id}")]
         public async Task<ActionResult<Products>> GetProducts(int id)
         {
             var products = await _context.Products.FindAsync(id);

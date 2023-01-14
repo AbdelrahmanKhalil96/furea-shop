@@ -9,7 +9,7 @@ namespace FureaAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : Controller
+    public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
@@ -22,15 +22,7 @@ namespace FureaAPI.Controllers
         {
             _logger = logger;
         }
-          [HttpGet]
-        [Route("public")]
-        public IActionResult Public()
-        {
-            return Json(new
-            {
-                Message = "Hello from a public endpoint! You don't need to be authenticated to see this."
-            });
-        }
+
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {

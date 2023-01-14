@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\ShopSite\\FureaAPI\\FureaAPI.csproj": {}
+    "E:\\ShopSite\\furea-shop\\FureaAPI\\FureaAPI.csproj": {}
   },
   "projects": {
-    "E:\\ShopSite\\FureaAPI\\FureaAPI.csproj": {
+    "E:\\ShopSite\\furea-shop\\FureaAPI\\FureaAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\ShopSite\\FureaAPI\\FureaAPI.csproj",
+        "projectUniqueName": "E:\\ShopSite\\furea-shop\\FureaAPI\\FureaAPI.csproj",
         "projectName": "FureaAPI",
-        "projectPath": "E:\\ShopSite\\FureaAPI\\FureaAPI.csproj",
+        "projectPath": "E:\\ShopSite\\furea-shop\\FureaAPI\\FureaAPI.csproj",
         "packagesPath": "C:\\Users\\Abdelrahman-Khalil\\.nuget\\packages\\",
-        "outputPath": "E:\\ShopSite\\FureaAPI\\obj\\",
+        "outputPath": "E:\\ShopSite\\furea-shop\\FureaAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Abdelrahman-Khalil\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,13 +39,33 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Microsoft.AspNetCore.Authentication": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[3.1.20, )"
             },
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[2.0.0, )"
+              "version": "[3.1.20, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.20, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.20, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.20, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.5, )"
             }
           },
           "imports": [

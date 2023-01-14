@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FureaAPI", "FureaAPI.csproj", "{2C482723-86E5-45FE-9F74-99F64FF82E0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FureaAPI", "FureaAPI.csproj", "{DBB303AC-F553-40BA-83CA-64642E3DA3A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPIApplication", "..\auth0-aspnetcore-webapi-samples-netcore2.1\Quickstart\01-Authorization\WebAPIApplication.csproj", "{A771BE8D-6BD1-4A67-B44B-C4255AD99A08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MulTry", "C:\Users\Abdelrahman-Khalil\source\repos\MulTry\MulTry.csproj", "{FD4A29F0-E5C1-44C3-8146-B04320354A9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +13,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2C482723-86E5-45FE-9F74-99F64FF82E0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C482723-86E5-45FE-9F74-99F64FF82E0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C482723-86E5-45FE-9F74-99F64FF82E0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C482723-86E5-45FE-9F74-99F64FF82E0C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A771BE8D-6BD1-4A67-B44B-C4255AD99A08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A771BE8D-6BD1-4A67-B44B-C4255AD99A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A771BE8D-6BD1-4A67-B44B-C4255AD99A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A771BE8D-6BD1-4A67-B44B-C4255AD99A08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBB303AC-F553-40BA-83CA-64642E3DA3A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBB303AC-F553-40BA-83CA-64642E3DA3A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBB303AC-F553-40BA-83CA-64642E3DA3A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBB303AC-F553-40BA-83CA-64642E3DA3A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4A29F0-E5C1-44C3-8146-B04320354A9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4A29F0-E5C1-44C3-8146-B04320354A9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4A29F0-E5C1-44C3-8146-B04320354A9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4A29F0-E5C1-44C3-8146-B04320354A9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {854F10D9-CDC8-421D-B027-8991D9E5A227}
+		SolutionGuid = {5800034A-A43D-4150-98AB-20232DC383F8}
 	EndGlobalSection
 EndGlobal

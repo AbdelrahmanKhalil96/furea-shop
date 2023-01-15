@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,8 @@ namespace FureaAPI.Models
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+  [EnableCors("CorsPolicy")]
+  public class ProductsController : ControllerBase
     {
         private readonly CoreDbContext _context;
 
@@ -29,10 +31,10 @@ namespace FureaAPI.Models
 
 
     [HttpGet("/ProdSpecified/")]
-    public IEnumerable<ProdData> GetUser()
+    public async Task<ActionResult<IEnumerable<ProdData>>> GetUser()
     {
       var ProdWithNames = (from a in _context.Products
-                      join c in _context.Categories on a.Id equals c.Id
+                      join c in _context.Categories on a.CategoryId equals c.Id
                       orderby a.Id descending
                       select new ProdData
                       {
@@ -42,10 +44,10 @@ namespace FureaAPI.Models
      description=a.Description,
      price=a.Price,
      oldPrice= (double)a.OldPrice,
- image =a.Image}).ToList();
+ image =a.Image});
 
                       
-      return ProdWithNames;
+      return await ProdWithNames.ToListAsync();
       //await _context.User.ToListAsync();
     }
 

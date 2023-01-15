@@ -19,6 +19,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { CartComponent } from './cart/cart.component';
 import { ShopComponent } from './shop/shop.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { ShopComponent } from './shop/shop.component';
       clientId: 'kojDK0wosJzLUhZA5VGIxSPO3HB2JEmr'
     }),
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

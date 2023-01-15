@@ -8,14 +8,18 @@ import { Product } from './product.model';
 export class ProductService {
 url:string="http://localhost:5000/ProdSpecified"
   products: Product[] = [];
+  cart: Product[] = [];
   constructor(private http:HttpClient) { }
   getAllProducts(){
     this.http.get(this.url).toPromise().then(
       res=>{
         this.products=res  as Product[];
-        console.log(this.products);
-
+      //  console.log(this.products);
       }
     )
+  }
+  addToCart(product: Product) {
+    this.cart.push(product);
+   // console.log(this.cart);
   }
 }

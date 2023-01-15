@@ -46,16 +46,15 @@ namespace FureaAPI
                 app.UseDeveloperExceptionPage();
             }
 
-           // app.UseHttpsRedirection();
+      // app.UseHttpsRedirection();
+      app.UseRouting();
 
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
+      app.UseAuthorization();
+      app.UseCors("CorsPolicy");
+      app.UseEndpoints(endpoints =>
+      {
+        endpoints.MapControllers();
+      });
+    }
     }
 }

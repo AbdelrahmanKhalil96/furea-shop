@@ -3,7 +3,8 @@ export class Product {
   name!: string
   categoryName!: string
   description!: string
-  price!: string
-  oldPrice!: string
+  price!: number
+  oldPrice!: number
   image!: string
+  qty!:number
 }

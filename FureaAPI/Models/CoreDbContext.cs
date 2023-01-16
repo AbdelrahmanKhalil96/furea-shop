@@ -19,6 +19,8 @@ namespace FureaAPI.Models
       public double price { get; set; }
       public double oldPrice { get; set; }
       public string image { get; set; }
+      public int Qty { get; set; }
+      
 
     }
     public CoreDbContext(DbContextOptions<CoreDbContext> options)

@@ -8,7 +8,7 @@
         <div class="col wrapper"*ngFor="let item of service.products">
           <div class="col" >
           <div class="box1 border mb-4">
-            <a href="#">          <img [src]="item.image"class="d-block w-100" alt="..."> </a>
+            <a routerLink="/All-Products/{{item.id}}" (click)="this.service.getPrductDetails(item.id)">         <img [src]="item.image"class="d-block w-100" alt="..."> </a>
             <div class="text-center fs-6 mt-1">
               <h6>{{ item.name }}</h6>
           <p style="color: red;">{{ item.price }}$<del class="ms-2" style="color: gray;"> {{ item.oldPrice }}$</del></p>

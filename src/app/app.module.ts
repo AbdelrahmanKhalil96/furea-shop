@@ -20,6 +20,7 @@ import { ContactComponent } from './contact/contact.component';
 import { CartComponent } from './cart/cart.component';
 import { ShopComponent } from './shop/shop.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProdDetailsComponent } from './prod-details/prod-details.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { HttpClientModule } from '@angular/common/http';
     AboutComponent,
     ContactComponent,
     CartComponent,
-    ShopComponent
+    ShopComponent,
+    ProdDetailsComponent
   ],
   imports: [
     BrowserModule,

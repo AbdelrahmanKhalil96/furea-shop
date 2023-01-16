@@ -29,9 +29,31 @@ namespace FureaAPI.Models
             return await _context.Products.ToListAsync();
         }
 
+    [HttpGet("/ProdSpecified/{id}")]
+    public async Task<ActionResult<IEnumerable<ProdData>>> GetSingleProduct(int id)
+    {
+      var ProdWithNames = (from a in _context.Products
+                           join c in _context.Categories on a.CategoryId equals c.Id
+                           orderby a.Id descending
+                           where a.Id ==id
+                           select new ProdData
+                           {
+                             id = a.Id,
+                             name = a.Name,
+                             categoryName = c.Name,
+                             Qty = (int)a.Qty,
+                             description = a.Description,
+                             price = a.Price,
+                             oldPrice = (double)a.OldPrice,
+                             image = a.Image
+                           });
 
+
+      return await ProdWithNames.ToListAsync();
+      //await _context.User.ToListAsync();
+    }
     [HttpGet("/ProdSpecified/")]
-    public async Task<ActionResult<IEnumerable<ProdData>>> GetUser()
+    public async Task<ActionResult<IEnumerable<ProdData>>> GetAllProducts()
     {
       var ProdWithNames = (from a in _context.Products
                       join c in _context.Categories on a.CategoryId equals c.Id
@@ -41,7 +63,8 @@ namespace FureaAPI.Models
                         id = a.Id,
                         name = a.Name,
              categoryName=c.Name,
-     description=a.Description,
+                        Qty= (int)a.Qty,
+     description =a.Description,
      price=a.Price,
      oldPrice= (double)a.OldPrice,
  image =a.Image});

@@ -4,6 +4,7 @@ import { AboutComponent } from './about/about.component';
 import { CartComponent } from './cart/cart.component';
 import { ContactComponent } from './contact/contact.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { ProdDetailsComponent } from './prod-details/prod-details.component';
 import { ShopComponent } from './shop/shop.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserLogoutComponent } from './user-logout/user-logout.component';
@@ -45,6 +46,11 @@ const routes: Routes = [
   {
     path: 'All-Products',
     component:ShopComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'All-Products/:id',
+    component:ProdDetailsComponent,
     pathMatch: 'full'
   },
     {

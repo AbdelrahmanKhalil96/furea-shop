@@ -11,9 +11,10 @@ import { ProductService } from '../product.service';
 export class ProdDetailsComponent implements OnInit {
   currentUrl=this.router.url.split('/')[2];
 constructor(public service:ProductService,private router: Router ){}
-selectedItem=this.service.PrductDetail[0]
 ngOnInit(){
   this.service.getPrductDetails(this.currentUrl)
-
+}
+changeBigImage(image:any){
+  console.log(image)
 }
 }

@@ -15,6 +15,8 @@ url:string="http://localhost:5000/ProdSpecified"
   user$ = this.authService.user$;
   selectedProduct:Product[]=[];
   PrductDetail: Product[] = [];
+  bigImage=''
+
   constructor(private http:HttpClient,public authService: AuthService) { }
   getAllProducts(){
     this.http.get(this.url).toPromise().then(
@@ -29,8 +31,18 @@ url:string="http://localhost:5000/ProdSpecified"
       res=>{
         this.PrductDetail=res  as Product[];
       console.log(this.PrductDetail);
+      this.bigImage=this.PrductDetail[0].image
+
       }
     )
+  }
+  removeItem(item: Product){
+    const index =   this.cart.indexOf(item);
+    if (index > -1) { // only splice array when item is found
+      this.cartTotal-=item.price*item.qty
+      this.cart.splice(index, 1); // 2nd parameter means remove one item only
+      console.log(this.cart)
+    }
   }
   placeOrder(){
     console.log(this.cart)

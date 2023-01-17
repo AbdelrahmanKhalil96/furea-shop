@@ -81,7 +81,7 @@
                 <h5 class="mb-0" >{{ item.qty * item.price}} </h5>
               </div>
               <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                <a routerLink="/my-cart"  (click)="this.service.removeItem(item);" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
               </div>
             </div>
           </div>
@@ -91,7 +91,7 @@
           <div class="card-body p-4 d-flex flex-row">
             <div class="form-outline flex-fill">
               <input type="text" id="form1" class="form-control form-control-lg" />
-              <label class="form-label" for="form1">Discound code</label>
+              <label class="form-label" for="form1">Discount code</label>
             </div>
             <button type="button" class="btn btn-outline-warning btn-lg ms-3">Apply</button>
           </div>

@@ -45,7 +45,10 @@ namespace FureaAPI.Models
                              description = a.Description,
                              price = a.Price,
                              oldPrice = (double)a.OldPrice,
-                             image = a.Image
+                             image = a.Image,
+                             image2=a.Image2,
+                             image3 = a.Image3,
+                             image4 = a.Image4,
                            });
 
 

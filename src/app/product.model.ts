@@ -6,5 +6,9 @@ export class Product {
   price!: number
   oldPrice!: number
   image!: string
+  image2!: string
+  image3!: string
+  image4!: string
+
   qty!:number
 }

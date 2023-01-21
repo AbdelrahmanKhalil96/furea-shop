@@ -26,6 +26,9 @@ url:string="http://localhost:5000/ProdSpecified"
       }
     )
   }
+  checkForUser(user:any){
+    console.log(user.email);
+  }
   getPrductDetails(id:any){
     this.http.get(this.url+"/"+id).toPromise().then(
       res=>{

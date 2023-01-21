@@ -60,27 +60,22 @@ foreach (Products product in ordersData.products )
         item.OrderId =(int) NewOrderID;
        _context.OrderItems.Add(item);
         //Console.WriteLine(item.ToString());
-      }
+           await _context.SaveChangesAsync();
+ }
+      var orderTotal = (from a in _context.OrderItems
+
+                        orderby a.Id descending
+                        where a.OrderId.Equals(NewOrderID)
+                        select a.Total).Sum();
+     
+      var NewOrder = _context.Orders.First(a => a.Id == NewOrderID);
+      NewOrder.TotalAmount = orderTotal;
       await _context.SaveChangesAsync();
- //    
-
-      /*     
-
-   _context.Orders.Add(order);
-
-         foreach(Products product in products)
-         {
-           item.Id = 2147483647;
-           item.NoPieces = (int)product.Qty;
-           item.Price = product.Price;
-           item.ProductId = product.Id;
-           item.Total = (double)(product.Price * product.Qty);
-         }
-   */
-
-      //  await _context.SaveChangesAsync();
-
-      return CreatedAtAction("GetOrders", new { id = order.Id }, order);
+      order.Id = NewOrder.Id;
+      order.TotalAmount = NewOrder.TotalAmount;
+      Console.WriteLine(orderTotal);
+  
+      return CreatedAtAction( "GetOrders", new { order });
     }
    
 

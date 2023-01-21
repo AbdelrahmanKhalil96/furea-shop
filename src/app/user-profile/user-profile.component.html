@@ -3,7 +3,6 @@
 
  <ng-container *ngIf="user$ | async as user ;else notVer">
    <br>
-
    <section class="vh-100" style="background-color: #f4f5f7;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -61,13 +60,16 @@
           <span class="profile__description">{{ user.email }}</span>
         </div>
       </div>
+
       <ng-container *ngIf="code$ | async as code">
         <div class="profile__details">
-          <h2>
+          <div #myDiv id="tutor-price" (click)="printuser(code)"></div>
+
+       <h2>
             {{title}}
           </h2>
           <h3>
-         {{user.email_verified}}
+         {{code}}
           </h3>
         </div>
       </ng-container>

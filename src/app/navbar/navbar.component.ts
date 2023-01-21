@@ -10,6 +10,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  login() {
+    this.authService.loginWithRedirect({
+      appState: {
+        target: '/profile',
+      },
+    });  }
 
   isAuthenticated$ = this.authService.isAuthenticated$;
 currentUrl=this.router.url;

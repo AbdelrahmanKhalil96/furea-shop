@@ -12,20 +12,20 @@ export class UserProfileComponent implements OnInit{
   title = 'Decoded ID Token';
   user$ = this.authService.user$;
   code$ = this.user$.pipe(map((user) => JSON.stringify(user, null, 2)));
-  @ViewChild('myDiv')
+  @ViewChild('myDiv',{static:false})
   myDiv!: ElementRef<HTMLElement>;
 
 triggerFalseClick() {
     let el: HTMLElement = this.myDiv.nativeElement;
     el.click();
 }
-printuser(us: any) {
 
-console.log(us);
-
-}
 ngOnInit(){
-  this.triggerFalseClick();
+
+ setTimeout(() => {
+      this.triggerFalseClick();
+
+  },);
 }
   constructor(private authService: AuthService, public service:ProductService ) {}
 

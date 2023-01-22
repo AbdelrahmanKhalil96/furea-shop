@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,8 +27,36 @@ namespace FureaAPI.Controllers
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/Users/5
-        [HttpGet("{id}")]
+    [HttpPost("/CheckForUser/")]
+    public async Task<ActionResult<Users>> CheckForUser(Users obtainedUser)
+    {
+      var user = await _context.Users.FindAsync(obtainedUser.Id);
+
+      if (user == null)
+      {
+        obtainedUser.Password = "123456";
+      _context.Users.Add(obtainedUser);
+            await _context.SaveChangesAsync();
+        return NotFound();
+      }
+
+else
+      {
+        if(user.Id== obtainedUser.Id && user.Email == obtainedUser.Email)
+        {
+        return CreatedAtAction("GetUsers",  user);
+
+        }
+        else
+        {
+          return BadRequest();
+        }
+
+ }
+    }
+
+    // GET: api/Users/5
+    [HttpGet("{id}")]
         public async Task<ActionResult<Users>> GetUsers(int id)
         {
             var users = await _context.Users.FindAsync(id);

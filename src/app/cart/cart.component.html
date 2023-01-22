@@ -101,7 +101,7 @@
           <div class="card-body">
             <button type="button" class="btn btn-warning btn-block btn-lg"(click)="this.service.placeOrder()">Proceed to Pay</button>
             <label>Total is {{this.service.cartTotal}} </label>
-
+<h3 style="color: red;" class="float-end" [hidden]="!this.service.placed">Order Placed</h3>
           </div>
         </div>
 

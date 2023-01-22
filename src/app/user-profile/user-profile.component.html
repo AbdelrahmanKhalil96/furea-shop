@@ -63,7 +63,7 @@
 
       <ng-container *ngIf="code$ | async as code">
         <div class="profile__details">
-          <div #myDiv id="tutor-price" (click)="printuser(code)"></div>
+          <div #myDiv id="tutor-price" style="display: none;" (click)="this.service.printuser(code)"></div>
 
        <h2>
             {{title}}

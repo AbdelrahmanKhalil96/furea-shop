@@ -2,86 +2,161 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from './product.model';
 import { AuthService } from '@auth0/auth0-angular';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-url:string="http://localhost:5000/ProdSpecified"
+  url: string = 'http://localhost:5000/';
   products: Product[] = [];
   cart: Product[] = [];
-  cartTotal:number=0;
-  selectedId:number=0
+  cartTotal: number = 0;
+  selectedId: number = 0;
   user$ = this.authService.user$;
-  selectedProduct:Product[]=[];
+  selectedProduct: Product[] = [];
   PrductDetail: Product[] = [];
-  bigImage=''
+  bigImage = '';
+  placed = false;
+  loggedUser: any = {};
 
-  constructor(private http:HttpClient,public authService: AuthService) { }
-  getAllProducts(){
-    this.http.get(this.url).toPromise().then(
-      res=>{
-        this.products=res  as Product[];
-      //  console.log(this.products);
-      }
-    )
+  constructor(
+    private http: HttpClient,
+    public authService: AuthService,
+    private router: Router
+  ) {}
+  getAllProducts() {
+    this.http
+      .get(this.url + 'ProdSpecified')
+      .toPromise()
+      .then((res) => {
+        this.products = res as Product[];
+        //  console.log(this.products);
+      });
   }
-  checkForUser(user:any){
+  checkForUser(user: any) {
     console.log(user.email);
   }
-  getPrductDetails(id:any){
-    this.http.get(this.url+"/"+id).toPromise().then(
-      res=>{
-        this.PrductDetail=res  as Product[];
-      console.log(this.PrductDetail);
-      this.bigImage=this.PrductDetail[0].image
-
-      }
-    )
+  getPrductDetails(id: any) {
+    this.http
+      .get(this.url + 'ProdSpecified/' + id)
+      .toPromise()
+      .then((res) => {
+        this.PrductDetail = res as Product[];
+        console.log(this.PrductDetail);
+        this.bigImage = this.PrductDetail[0].image;
+      });
   }
-  removeItem(item: Product){
-    const index =   this.cart.indexOf(item);
-    if (index > -1) { // only splice array when item is found
-      this.cartTotal-=item.price*item.qty
+  removeItem(item: Product) {
+    const index = this.cart.indexOf(item);
+    if (index > -1) {
+      // only splice array when item is found
+      this.cartTotal -= item.price * item.qty;
       this.cart.splice(index, 1); // 2nd parameter means remove one item only
-      console.log(this.cart)
+      console.log(this.cart);
     }
   }
-  placeOrder(){
-    console.log(this.cart)
+  printuser(us: string) {
+    try {
+      // let num = JSON.parse(us).sub.split('|')[1].slice(-5);
+      let jsonData = JSON.parse(us);
+      let postedData: any = {};
+      postedData['name'] = jsonData.name;
+      postedData['image'] = jsonData.picture;
+      postedData['email'] = jsonData.email;
+      postedData['id'] = Number(jsonData.sub.split('|')[1].slice(-5));
+      //console.log(postedData);
+      this.loggedUser = postedData;
+
+      this.http
+        .post(this.url + 'CheckForUser', postedData)
+        .toPromise()
+        .then((res) => {
+          //  this.products=res  as Product[];
+          console.log(res);
+        })
+        .catch((err) => {
+          if (err.status == 404) {
+            console.log('user Created');
+          } else if (err.status == 400) {
+            console.log('user Data Error');
+          }
+        });
+    } catch {
+      console.log('unknown Error');
+    }
   }
-  changeProductQty(qty: number,product: Product){
-    if(product.qty>0){
-      if(qty>0){
-        this.cartTotal+=product.price ;
-      }
-      else{
-        this.cartTotal-=product.price ;
+  placeOrder() {
+    // console.log(this.loggedUser.id)
+    //
+    // console.log(this.cart)
+    if (this.cart.length > 0 && this.loggedUser.id != null) {
+      this.http
+        .post(this.url + 'ProcessOrder', {
+          userId: this.loggedUser.id,
+          products: this.cart,
+        })
+        .toPromise()
+        .then((res: any) => {
+          //  this.products=res  as Product[];
+          if (res.order.id > 0) {
+            this.cart = [];
+            this.cartTotal = 0;
+            console.log('Order Placed');
+             this.placed = true;
+              console.log( this.placed )
+               setTimeout(() => {
 
-      }
-      product.qty+=qty;
-    this.cart[this.cart.indexOf(product)]=product
+            }, 100);
+            setTimeout(() => {
+              this.placed = false;
+              console.log( this.placed )
+
+              // this.router.navigate(['/profile'])
+            }, 1000);
+            setTimeout(() => {
+              this.router.navigate(['/profile'])
+            }, 1000);
+          }
+          console.log(res.order.id);
+        })
+        .catch((err) => {
+          if (err.status == 404) {
+            console.log('404 Not Found');
+          } else if (err.status == 400) {
+            console.log('Bad Request');
+          }
+        });
+    } else {
+      console.log('Bad Data');
     }
-    else if(product.qty==0&&qty>0){
-      this.cartTotal+=product.price ;
-      product.qty+=qty;
-      this.cart[this.cart.indexOf(product)]=product
-
-
+  }
+  changeProductQty(qty: number, product: Product) {
+    if (product.qty > 0) {
+      if (qty > 0) {
+        this.cartTotal += product.price;
+      } else {
+        this.cartTotal -= product.price;
+      }
+      product.qty += qty;
+      this.cart[this.cart.indexOf(product)] = product;
+    } else if (product.qty == 0 && qty > 0) {
+      this.cartTotal += product.price;
+      product.qty += qty;
+      this.cart[this.cart.indexOf(product)] = product;
     }
-
   }
   addToCart(product: Product) {
-    if(this.cart.includes(product)){
-     // console.log(this.cart.indexOf(product))
-product.qty+=1
-//console.log(product)
-this.cart[this.cart.indexOf(product)]=product
+    if (this.cart.includes(product)) {
+      // console.log(this.cart.indexOf(product))
+      product.qty += 1;
+      //console.log(product)
+      this.cart[this.cart.indexOf(product)] = product;
+    } else {
+      this.cart.push(product);
     }
-    else
-    {this.cart.push(product);
-}    this.cartTotal+=product.price ;
+    this.cartTotal += product.price;
 
-   // console.log(this.cart);
+    // console.log(this.cart);
   }
 }

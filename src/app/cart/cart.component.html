@@ -101,6 +101,9 @@
           <div class="card-body">
             <button type="button" class="btn btn-warning btn-block btn-lg"(click)="this.service.placeOrder()">Proceed to Pay</button>
             <label>Total is {{this.service.cartTotal}} </label>
+            <br>
+            <div class="text-center" *ngIf="this.service.errors">  <h4 style="color: red;"> Database Error <br> . Please Contact Our Support</h4>
+            </div>
 <h3 style="color: red;" class="float-end" [hidden]="!this.service.placed">Order Placed</h3>
           </div>
         </div>

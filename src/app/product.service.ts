@@ -19,6 +19,7 @@ export class ProductService {
   bigImage = '';
   placed = false;
   loggedUser: any = {};
+  errors='';
 
   constructor(
     private http: HttpClient,
@@ -31,7 +32,11 @@ export class ProductService {
       .toPromise()
       .then((res) => {
         this.products = res as Product[];
+        this.errors=''
         //  console.log(this.products);
+      }).catch((err)=>{
+        this.errors="Database Error";
+        console.log(err);
       });
   }
   checkForUser(user: any) {
@@ -45,6 +50,11 @@ export class ProductService {
         this.PrductDetail = res as Product[];
         console.log(this.PrductDetail);
         this.bigImage = this.PrductDetail[0].image;
+        this.errors=''
+
+      }).catch((err)=>{
+        this.errors="Database Error";
+        console.log(err);
       });
   }
   removeItem(item: Product) {
@@ -74,12 +84,25 @@ export class ProductService {
         .then((res) => {
           //  this.products=res  as Product[];
           console.log(res);
+          this.errors=''
+
         })
         .catch((err) => {
           if (err.status == 404) {
             console.log('user Created');
+            this.errors=''
+
           } else if (err.status == 400) {
             console.log('user Data Error');
+            this.errors=''
+
+          }
+          else{
+
+
+            this.errors="Database Error";
+            console.log(err);
+
           }
         });
     } catch {
@@ -105,6 +128,7 @@ export class ProductService {
             console.log('Order Placed');
              this.placed = true;
               console.log( this.placed )
+              this.errors=""
                setTimeout(() => {
 
             }, 100);
@@ -122,13 +146,18 @@ export class ProductService {
         })
         .catch((err) => {
           if (err.status == 404) {
+            this.errors="404 Not Found"
             console.log('404 Not Found');
           } else if (err.status == 400) {
             console.log('Bad Request');
+            this.errors="Bad Request"
+
           }
         });
     } else {
       console.log('Bad Data');
+      this.errors="Bad Data"
+
     }
   }
   changeProductQty(qty: number, product: Product) {

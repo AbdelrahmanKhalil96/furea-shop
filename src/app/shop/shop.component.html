@@ -3,8 +3,9 @@
 <br><br>
 <br>
 <div class="container">
-
-      <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2">
+<div class="text-center" *ngIf="this.service.errors">  <h4 style="color: red;"> Database Error <br> . Please Contact Our Support</h4>
+</div>
+  <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2">
         <div class="col wrapper"*ngFor="let item of service.products">
           <div class="col" >
           <div class="box1 border mb-4">

@@ -21,6 +21,7 @@ import { CartComponent } from './cart/cart.component';
 import { ShopComponent } from './shop/shop.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProdDetailsComponent } from './prod-details/prod-details.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ProdDetailsComponent } from './prod-details/prod-details.component';
     ContactComponent,
     CartComponent,
     ShopComponent,
-    ProdDetailsComponent
+    ProdDetailsComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,

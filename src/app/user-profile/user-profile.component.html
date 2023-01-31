@@ -91,8 +91,8 @@
             </div>
           </div>
         </div>
-        <!--
-        <div class="orders-grid">
+
+        <div class="orders-grid" style="display: none;">
           <div class="profile__header">
             <img [src]="user.picture" alt="Profile" class="profile__avatar" />
             <div class="profile__headline">
@@ -101,7 +101,7 @@
             </div>
           </div>
 
-          <ng-container *ngIf="code$ | async as code">
+          <ng-container *ngIf="code$ | async as code" >
             <div class="profile__details">
               <div #myDiv id="tutor-price" style="display: none;" (click)="this.service.printuser(code)"></div>
 
@@ -113,7 +113,7 @@
               </h3>
             </div>
           </ng-container>
-        </div>-->
+        </div>
       </section>
 
           </ng-container>
@@ -155,12 +155,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
+      <tr *ngFor="let order of this.service.userOrders.userOrders">
+        <th scope="row"><a  routerLink="/user-orders/{{order.id}}" (click)="this.service.getOrderDetails(order)"> {{order.id}}</a></th>
+        <td>{{order.userName}}</td>
+        <td>{{order.orderDate}}</td>
+        <td>{{order.totalAmount}}</td>
+        <td>{{order.orderStatus}}</td>
 
       </tr>
 

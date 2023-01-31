@@ -14,6 +14,8 @@ export class ProductService {
   cartTotal: number = 0;
   selectedId: number = 0;
   user$ = this.authService.user$;
+  userOrders:any=[]
+  orderDetails:any=[]
   selectedProduct: Product[] = [];
   PrductDetail: Product[] = [];
   bigImage = '';
@@ -26,6 +28,7 @@ export class ProductService {
     public authService: AuthService,
     private router: Router
   ) {}
+
   getAllProducts() {
     this.http
       .get(this.url + 'ProdSpecified')
@@ -42,6 +45,33 @@ export class ProductService {
   checkForUser(user: any) {
     console.log(user.email);
   }
+  getuserOrders(){
+    this.http
+      .post(this.url + 'GetUserOrders',this.loggedUser)
+      .toPromise()
+      .then((res) => {
+        this.userOrders = res ;
+        this.errors=''
+         console.log(this.userOrders);
+      }).catch((err)=>{
+        this.errors="Database Error";
+        console.log(err);
+      });
+  }
+  getOrderDetails(id:any){
+    this.http
+      .post(this.url + 'GetOrderDetails',id)
+      .toPromise()
+      .then((res) => {
+        this.orderDetails = res ;
+        this.errors=''
+         console.log(this.orderDetails);
+      }).catch((err)=>{
+        this.errors="Database Error";
+        console.log(err);
+      });
+  }
+
   getPrductDetails(id: any) {
     this.http
       .get(this.url + 'ProdSpecified/' + id)

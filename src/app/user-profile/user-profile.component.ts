@@ -24,6 +24,7 @@ ngOnInit(){
 
  setTimeout(() => {
       this.triggerFalseClick();
+      this.service.getuserOrders();
 
   },);
 }

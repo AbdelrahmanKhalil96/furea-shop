@@ -77,7 +77,60 @@ foreach (Products product in ordersData.products )
   
       return CreatedAtAction( "GetOrders", new { order });
     }
-   
+
+
+    [HttpPost("/GetUserOrders/")]
+
+    public async Task<ActionResult<Orders>> GetUserOrders(Users user)
+    {
+
+      var userOrders = await (from a in _context.Orders
+                        join c in _context.Users on a.UserId equals c.Id
+                        orderby a.Id descending
+                       where a.UserId.Equals(user.Id)
+                        select new {
+                          id=a.Id,
+                          userName=c.Name,
+                          userId= a.UserId,
+             orderDate = a.OrderDate,
+             totalAmount = a.TotalAmount,
+             orderStatus =a.OrderStatus,
+                        }).ToListAsync();
+
+      Console.WriteLine(userOrders);
+
+
+      return CreatedAtAction("GetOrders", new { userOrders });
+    }
+
+
+    [HttpPost("/GetOrderDetails/")]
+
+    public async Task<ActionResult<Orders>> GetOrderDetails(Orders order)
+    {
+
+      var userOrders = await (from a in _context.OrderItems
+                              join b in _context.Orders on a.OrderId equals b.Id
+                              join c in _context.Products on a.ProductId equals c.Id
+                              orderby a.Total descending
+                              where a.OrderId.Equals(order.Id)
+                              select new
+                              {
+                                id = a.Id,
+                                ProductName = c.Name,
+                                qty=a.NoPieces,
+                                Price=c.Price,
+                                 ProductSum = a.Total,
+                                orderTotal = b.TotalAmount,
+                              }).ToListAsync();
+
+      //Console.WriteLine(userOrders);
+
+
+      return CreatedAtAction("GetOrders", new { userOrders });
+    }
+
+
 
     // GET: api/Orders/5
     [HttpGet("{id}")]

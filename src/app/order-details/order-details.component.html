@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<br>
+<br>
+
+<div class="tab-pane container ms-md-5 position-absolute start-50 translate-middle-x  " id="orders" role="tabpanel" aria-labelledby="orders-tab">
+  <br>
+  <br>
+<div class="ms-md-5  w-100">
+<div class="row ms-md-5 d-flex justify-content-center align-items-center">
+<table class="table table-striped ms-md-5">
+  <thead>
+    <tr>
+      <th scope="col">Quantity</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Product Price</th>
+      <th scope="col">Sum</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of this.service.orderDetails.userOrders">
+      <th scope="row">{{order.qty}}</th>
+      <td>{{order.productName}}</td>
+      <td>{{order.price}}</td>
+      <td>{{order.productSum}}</td>
+
+    </tr>
+
+  </tbody>
+</table>
+</div>
+</div>
+</div>

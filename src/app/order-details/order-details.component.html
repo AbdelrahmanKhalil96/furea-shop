@@ -1,8 +1,31 @@
 <app-navbar></app-navbar>
 <br>
 <br>
+<header>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4 ">
 
-<div class="tab-pane container ms-md-5 position-absolute start-50 translate-middle-x  " id="orders" role="tabpanel" aria-labelledby="orders-tab">
+        <!-- Collapsed content -->
+        <ul class="nav btn-group-vertical mt-5 " id="myTab" role="tablist">
+          <li class="nav-item w-100 active" role="presentation">
+            <button class="btn  w-100" id="orders-tab"  routerLink="/profile">Back To Profile</button>
+          </li>
+
+        </ul>
+
+        <!-- Collapsed content -->
+
+        <!-- Collapse 2 -->
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar -->
+
+
+</header>
+<div class="tab-pane container ms-md-5 position-absolute start-50 translate-middle-x  " >
   <br>
   <br>
 <div class="ms-md-5  w-100">
@@ -28,6 +51,9 @@
 
   </tbody>
 </table>
+<div *ngIf="this.service.orderDetails.userOrders" class="text-center">
+  <h5>{{this.service.orderDetails.userOrders[0].orderTotal}} </h5>
+</div>
 </div>
 </div>
 </div>

@@ -104,8 +104,8 @@ export class ProductService {
       postedData['name'] = jsonData.name;
       postedData['image'] = jsonData.picture;
       postedData['email'] = jsonData.email;
-      postedData['id'] = Number(jsonData.sub.split('|')[1].slice(-5));
-      //console.log(postedData);
+      postedData['id'] = parseInt(jsonData.sub.split('|')[1].slice(-5),16);
+      //console.log(parseInt(jsonData.sub.split('|')[1].slice(-5),16));
       this.loggedUser = postedData;
 
       this.http

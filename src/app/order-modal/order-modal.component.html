@@ -1,0 +1,53 @@
+<div class="modal-header bg-info">
+  <h4 class="modal-title">Edit Order</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="this.service.orderDetails.userOrders">
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Product Price</th>
+        <th scope="col">Sum</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of this.service.orderDetails.userOrders">
+        <th scope="row">{{this.service.selectedAdminEdit.id}} </th>
+          <td>
+
+          <div ngbDropdown class="d-inline-block">
+            <a routerLink="adminPage" id="dropdownMenuButton" ngbDropdownToggle> {{order.qty}}</a>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+              <button ngbDropdownItem (click)="changeAction(order,1)">1</button>
+              <button ngbDropdownItem  (click)="changeAction(order,2)">2</button>
+              <button ngbDropdownItem (click)="changeAction(order,3)">3</button>
+            </div>
+          </div>
+        </td>
+        <td>{{order.productName}}</td>
+        <td>{{order.price}}</td>
+        <td>{{order.productSum}}</td>
+
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+<button class="btn btn-danger" (click)="openDeleteModal()">Delete Order</button>
+  <div ngbDropdown class="d-inline-block" *ngIf="this.service.orderDetails.userOrders[0]">
+    <button class="btn btn-outline-primary" id="dropdownMenuButton" ngbDropdownToggle>{{this.service.orderDetails.userOrders[0].orderStatus}}</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+      <button ngbDropdownItem (click)="changeOrderStatus('New')">New</button>
+      <button ngbDropdownItem  (click)="changeOrderStatus('Shipped')">Shipped</button>
+      <button ngbDropdownItem (click)="changeOrderStatus('Delivered')">Delivered</button>
+    </div>
+  </div>
+<button class="btn btn-primary" (click)="saveOrder()">Save</button></div>

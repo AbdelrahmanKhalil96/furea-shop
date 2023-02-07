@@ -1,0 +1,61 @@
+<div class="modal-header bg-info">
+  <h4 class="modal-title">Edit User</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="this.service.selectedUserEdit">
+  <table class="table">
+
+    <tbody>
+      <tr>
+        <th scope="row">User Id</th>
+
+        <td scope="row">{{ this.service.selectedUserEdit.id }}</td>
+      </tr>
+      <tr>
+        <th scope="row">User Name</th>
+
+        <td>
+          <input type="text" [value]="this.service.selectedUserEdit.name" />
+        </td>
+      </tr>
+     <!--   <tr>
+        <th scope="row">Password</th>
+
+        <td>
+          <input type="password" [value]="this.service.selectedUserEdit.password" />
+        </td>
+      </tr>-->
+      <tr>
+        <th scope="row">Email</th>
+
+        <td>
+          <input type="text" [value]="this.service.selectedUserEdit.email" />
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Title</th>
+
+        <td>
+          <div ngbDropdown class="d-inline-block">
+            <a routerLink="adminPage" id="dropdownMenuButton" ngbDropdownToggle> {{this.service.selectedUserEdit.title}}</a>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+              <button ngbDropdownItem (click)="this.service.selectedUserEdit.title='notAdmin'">Not Admin</button>
+              <button ngbDropdownItem  (click)="this.service.selectedUserEdit.title='Admin'">Admin</button>            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+
+
+  <button class="btn btn-primary" (click)="saveUser()">Save</button>
+</div>

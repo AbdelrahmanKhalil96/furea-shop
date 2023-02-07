@@ -1,0 +1,113 @@
+<app-navbar></app-navbar>
+
+<!--Main Navigation-->
+<header>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white ">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush ms-md-3 mt-md-4">
+
+        <!-- Collapsed content -->
+        <ul class="nav btn-group-vertical mt-5" id="myTab" role="tablist">
+          <li class="nav-item w-100" role="presentation">
+            <button class="btn  w-100 active" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab" aria-controls="orders" aria-selected="false">Orders</button>
+          </li>
+          <li class="nav-item w-100" role="presentation">
+            <button class="btn  w-100 " id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true">All Users</button>
+          </li>
+      <!--     <li class="nav-item w-100" role="presentation">
+            <button class="btn  w-100" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+          </li>
+          <li class="nav-item w-100" role="presentation">
+            <button class="btn  w-100" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
+          </li> -->
+        </ul>
+
+        <!-- Collapsed content -->
+
+        <!-- Collapse 2 -->
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar -->
+
+
+</header>
+<!--Main Navigation-->
+<div class="tab-content" *ngIf="this.service.admin ">
+
+  <div class="tab-pane active container ms-md-5 position-absolute start-50 translate-middle-x  " id="orders" role="tabpanel" aria-labelledby="orders-tab">
+    <br>
+    <br>
+<div class="ms-md-5 ">
+  <div class="row ms-md-5 d-flex justify-content-center align-items-center">
+  <table class="table ms-md-5">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">userName</th>
+        <th scope="col">Date</th>
+        <th scope="col">Total</th>
+        <th scope="col">status</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of this.service.userOrders.userOrders">
+        <th scope="row"><a  routerLink="/adminPage"  (click)="openModal(order)"> {{order.id}}</a></th>
+        <td>{{order.userName}}</td>
+        <td>{{order.orderDate | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+        <td>{{order.totalAmount}}</td>
+        <td>{{order.orderStatus}}</td>
+
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+  </div>
+  </div>
+  <div class="tab-pane container ms-sm-5 position-absolute start-50 translate-middle-x" id="users" role="tabpanel" aria-labelledby="users-tab"><!--Main layout-->
+
+
+       <br>   <br>
+       <div class="ms-sm-5 ">
+        <div class="row ms-sm-5 d-flex justify-content-center align-items-center ">
+        <table class="table ms-sm-5">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">userName</th>
+              <th scope="col">Password</th>
+                   <th scope="col">Admin Status</th>
+                   <th scope="col">email</th>
+       <!--    <th scope="col">image</th>
+ -->
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of this.service.allUsers">
+              <th scope="row"><a  routerLink="/adminPage"  (click)="openUserModal(user)"> {{user.id}}</a></th>
+              <td>{{user.name}}</td>
+              <td>**********</td>
+              <td>{{user.title}}</td>
+              <td class="word-wrap">{{user.email}}</td>
+        <!--   <td><img [src]="user.image" alt="">
+
+              </td> -->
+
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+        </div>
+
+
+    <!--Main layout-->
+    </div>
+</div>
+

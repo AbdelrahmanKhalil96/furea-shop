@@ -79,6 +79,33 @@ foreach (Products product in ordersData.products )
     }
 
 
+    [HttpGet("/GetAllOrders/")]
+
+    public async Task<ActionResult<Orders>> GetAllOrders()
+    {
+
+      var userOrders = await (from a in _context.Orders
+                              join c in _context.Users on a.UserId equals c.Id
+                              orderby a.Id descending
+
+                              orderby a.OrderStatus descending
+                               select new
+                              {
+                                id = a.Id,
+                                userName = c.Name,
+                                userId = a.UserId,
+                                orderDate = a.OrderDate,
+                                totalAmount = a.TotalAmount,
+                                orderStatus = a.OrderStatus,
+                              }).ToListAsync();
+
+      Console.WriteLine(userOrders);
+
+
+      return CreatedAtAction("GetOrders", new { userOrders });
+    }
+
+
     [HttpPost("/GetUserOrders/")]
 
     public async Task<ActionResult<Orders>> GetUserOrders(Users user)
@@ -118,10 +145,12 @@ foreach (Products product in ordersData.products )
                               {
                                 id = a.Id,
                                 ProductName = c.Name,
-                                qty=a.NoPieces,
+                                ProductId=c.Id,
+                                qty =a.NoPieces,
                                 Price=c.Price,
                                  ProductSum = a.Total,
                                 orderTotal = b.TotalAmount,
+                                orderStatus=b.OrderStatus
                               }).ToListAsync();
 
       //Console.WriteLine(userOrders);
@@ -194,7 +223,19 @@ foreach (Products product in ordersData.products )
         [HttpDelete("{id}")]
         public async Task<ActionResult<Orders>> DeleteOrders(int id)
         {
-            var orders = await _context.Orders.FindAsync(id);
+      Console.WriteLine(id);
+      var orderItems = await _context.OrderItems.Where(a => a.OrderId == id).Select(s => s).ToListAsync();
+      orderItems.ForEach(item =>
+      {
+      _context.OrderItems.Remove(item);
+
+
+      });
+        await _context.SaveChangesAsync();
+
+
+
+      var orders = await _context.Orders.FindAsync(id);
             if (orders == null)
             {
                 return NotFound();

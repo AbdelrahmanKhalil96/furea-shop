@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserLogoutComponent } from '../user-logout/user-logout.component';
 import { Router } from '@angular/router';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,6 +19,10 @@ export class NavbarComponent {
     });  }
 
   isAuthenticated$ = this.authService.isAuthenticated$;
+
+ /* setTimeout(() => {
+
+  }, 1000);*/
 currentUrl=this.router.url;
 /*   @Input() public user = {
     name: 'Izzat Nadiri',
@@ -40,5 +45,6 @@ modalRef.componentInstance.user = this.user;*/
 console.log(receivedEntry);
 })*/
   }
-  constructor(private authService: AuthService,private router: Router ,public modalService: NgbModal) {}
+  constructor(private authService: AuthService,private router: Router ,public modalService: NgbModal,
+    public service:ProductService) {}
 }

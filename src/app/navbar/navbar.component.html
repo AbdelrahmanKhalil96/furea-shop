@@ -49,6 +49,9 @@
               <li class="nav-item col  ms-3">
               <a routerLink="/my-cart"> <i class="fa-solid fa-cart-shopping"></i></a>
               </li>
+              <li class="nav-item col  ms-3" *ngIf="this.service.admin">
+                <a routerLink="/adminPage"> <i class="fa-solid fa-unlock"></i></a>
+                </li>
               <li class="nav-item col  ms-3">
                 <a  [routerLink]="[currentUrl]" (click)="openLogoutModal()">
                    <i class="fa-solid fa-arrow-right-from-bracket"></i>

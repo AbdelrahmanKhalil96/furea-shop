@@ -8,66 +8,183 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ProductService {
+
+  admin=false
   url: string = 'http://localhost:5000/';
   products: Product[] = [];
   cart: Product[] = [];
   cartTotal: number = 0;
   selectedId: number = 0;
   user$ = this.authService.user$;
-  userOrders:any=[]
-  orderDetails:any=[]
+  userOrders: any = [];
+  orderDetails: any = [];
   selectedProduct: Product[] = [];
   PrductDetail: Product[] = [];
   bigImage = '';
   placed = false;
   loggedUser: any = {};
-  errors='';
+  errors = '';
+  selectedAdminEdit: any = {};
+  selectedUserEdit: any = {};
+  allUsers:any={}
 
   constructor(
     private http: HttpClient,
     public authService: AuthService,
     private router: Router
   ) {}
+getallUsersAdmin(){
+  this.http
+          .get(this.url + 'api/users/')
+          .toPromise()
+          .then((res) => {
+           this.allUsers=res
+            this.errors = '';
+            console.log(this.allUsers)
+          })
+          .catch((err) => {
+            this.errors = 'Database Error';
+            console.log(err);
+          });
+}
 
+  saveEditedOrder(orderItems: any, order: any) {
+    console.log('order is' + JSON.stringify(order));
+    console.log('orderItems is' + JSON.stringify(orderItems));
+    var sentOrder: any = {};
+    sentOrder.id = order.id;
+    sentOrder.totalAmount = 0;
+    sentOrder.userId=order.userId;
+    sentOrder.orderDate=order.orderDate;
+
+    if (orderItems.length > 0) {
+      sentOrder.orderStatus = orderItems[0].orderStatus;
+      orderItems.forEach((item: any) => {
+        var sentItem: any = {};
+        sentItem.id = item.id;
+        sentItem.orderId = order.id;
+        sentItem.noPieces = item.qty;
+        sentItem.total = item.productSum;
+        sentItem.productId = item.productId;
+        sentOrder.totalAmount = sentOrder.totalAmount + sentItem.total;
+        this.http
+          .put(this.url + 'api/OrderItems/' + item.id, sentItem)
+          .toPromise()
+          .then((res) => {
+            if (res == null) {
+            }
+            this.errors = '';
+            console.log(res);
+          })
+          .catch((err) => {
+            this.errors = 'Database Error';
+            console.log(err);
+          });
+      });
+    }
+    console.log(sentOrder)
+    this.http
+      .put(this.url + 'api/Orders/' + sentOrder.id, sentOrder)
+      .toPromise()
+      .then((res) => {
+        this.errors = '';
+        console.log(res);
+        if(res==null){
+          this.getAdminusersOrders();
+        }
+      })
+      .catch((err) => {
+        this.errors = 'Database Error';
+        console.log(err);
+      });
+  }
   getAllProducts() {
     this.http
       .get(this.url + 'ProdSpecified')
       .toPromise()
       .then((res) => {
         this.products = res as Product[];
-        this.errors=''
+        this.errors = '';
         //  console.log(this.products);
-      }).catch((err)=>{
-        this.errors="Database Error";
+      })
+      .catch((err) => {
+        this.errors = 'Database Error';
         console.log(err);
       });
   }
   checkForUser(user: any) {
     console.log(user.email);
   }
-  getuserOrders(){
+  getuserOrders() {
     this.http
-      .post(this.url + 'GetUserOrders',this.loggedUser)
+      .post(this.url + 'GetUserOrders', this.loggedUser)
       .toPromise()
       .then((res) => {
-        this.userOrders = res ;
-        this.errors=''
-         console.log(this.userOrders);
-      }).catch((err)=>{
-        this.errors="Database Error";
+        this.userOrders = res;
+        this.errors = '';
+        console.log(this.userOrders);
+      })
+      .catch((err) => {
+        this.errors = 'Database Error';
         console.log(err);
       });
   }
-  getOrderDetails(id:any){
+  getAdminusersOrders() {
     this.http
-      .post(this.url + 'GetOrderDetails',id)
+      .get(this.url + 'GetAllOrders')
       .toPromise()
       .then((res) => {
-        this.orderDetails = res ;
-        this.errors=''
-         console.log(this.orderDetails);
-      }).catch((err)=>{
-        this.errors="Database Error";
+        this.userOrders = res;
+        this.errors = '';
+        console.log(this.userOrders);
+      })
+      .catch((err) => {
+        this.errors = 'Database Error';
+        console.log(err);
+      });
+  }
+  deleteOrder(orderID: any) {
+    this.http
+      .delete(this.url + 'api/Orders/' + parseInt(orderID))
+      .toPromise()
+      .then((res) => {
+        this.errors = '';
+        console.log(res);
+        this.getAdminusersOrders();
+      })
+      .catch((err) => {
+        this.errors = 'Database Error';
+        console.log(err);
+      });
+  }
+
+  saveEditedUser(){
+    this.http
+    .put(this.url + 'api/users/' + this.selectedUserEdit.id, this.selectedUserEdit)
+    .toPromise()
+    .then((res) => {
+      this.errors = '';
+      console.log(res);
+      if(res==null){
+        this.getallUsersAdmin();
+      }
+    })
+    .catch((err) => {
+      this.errors = 'Database Error';
+      console.log(err);
+    });
+  }
+  getOrderDetails(id: any) {
+    this.http
+      .post(this.url + 'GetOrderDetails', id)
+      .toPromise()
+      .then((res) => {
+        this.orderDetails = res;
+        this.errors = '';
+        console.log(this.orderDetails);
+      })
+      .catch((err) => {
+        this.errors = 'Database Error';
         console.log(err);
       });
   }
@@ -80,10 +197,10 @@ export class ProductService {
         this.PrductDetail = res as Product[];
         console.log(this.PrductDetail);
         this.bigImage = this.PrductDetail[0].image;
-        this.errors=''
-
-      }).catch((err)=>{
-        this.errors="Database Error";
+        this.errors = '';
+      })
+      .catch((err) => {
+        this.errors = 'Database Error';
         console.log(err);
       });
   }
@@ -104,7 +221,8 @@ export class ProductService {
       postedData['name'] = jsonData.name;
       postedData['image'] = jsonData.picture;
       postedData['email'] = jsonData.email;
-      postedData['id'] = parseInt(jsonData.sub.split('|')[1].slice(-5),16);
+      postedData['id'] = parseInt(jsonData.sub.split('|')[1].slice(-5), 16);
+      postedData['title']
       //console.log(parseInt(jsonData.sub.split('|')[1].slice(-5),16));
       this.loggedUser = postedData;
 
@@ -114,25 +232,42 @@ export class ProductService {
         .then((res) => {
           //  this.products=res  as Product[];
           console.log(res);
-          this.errors=''
 
+          this.http
+        .get(this.url + 'api/users/'+this.loggedUser.id)
+        .toPromise()
+        .then((res: any) => {
+          //  this.products=res  as Product[];
+          console.log(res);
+          this.loggedUser.title=res.title
+          console.log("Logged Is "+this.loggedUser.title);
+          if(this.loggedUser.title=='Admin'){
+            this.admin=true
+          this.errors = '';}
+        else{
+          this.admin=false
+        }
+        })
+        .catch((err) => {
+          if (err.status == 404) {
+            console.log('user not found');
+            this.errors = '';
+          }
+        });
+          console.log("Logged Is "+this.loggedUser.title);
+
+          this.errors = '';
         })
         .catch((err) => {
           if (err.status == 404) {
             console.log('user Created');
-            this.errors=''
-
+            this.errors = '';
           } else if (err.status == 400) {
             console.log('user Data Error');
-            this.errors=''
-
-          }
-          else{
-
-
-            this.errors="Database Error";
+            this.errors = '';
+          } else {
+            this.errors = 'Database Error';
             console.log(err);
-
           }
         });
     } catch {
@@ -156,38 +291,34 @@ export class ProductService {
             this.cart = [];
             this.cartTotal = 0;
             console.log('Order Placed');
-             this.placed = true;
-              console.log( this.placed )
-              this.errors=""
-               setTimeout(() => {
-
-            }, 100);
+            this.placed = true;
+            console.log(this.placed);
+            this.errors = '';
+            setTimeout(() => {}, 100);
             setTimeout(() => {
               this.placed = false;
-              console.log( this.placed )
+              console.log(this.placed);
 
               // this.router.navigate(['/profile'])
             }, 1000);
             setTimeout(() => {
-              this.router.navigate(['/profile'])
+              this.router.navigate(['/profile']);
             }, 1000);
           }
           console.log(res.order.id);
         })
         .catch((err) => {
           if (err.status == 404) {
-            this.errors="404 Not Found"
+            this.errors = '404 Not Found';
             console.log('404 Not Found');
           } else if (err.status == 400) {
             console.log('Bad Request');
-            this.errors="Bad Request"
-
+            this.errors = 'Bad Request';
           }
         });
     } else {
       console.log('Bad Data');
-      this.errors="Bad Data"
-
+      this.errors = 'Bad Data';
     }
   }
   changeProductQty(qty: number, product: Product) {

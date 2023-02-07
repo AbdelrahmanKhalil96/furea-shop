@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 import { CartComponent } from './cart/cart.component';
 import { ContactComponent } from './contact/contact.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -62,6 +63,11 @@ const routes: Routes = [
   {
     path: 'profile',
     component:UserProfileComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'adminPage',
+    component:AdminPageComponent,
     pathMatch: 'full'
   },
   {

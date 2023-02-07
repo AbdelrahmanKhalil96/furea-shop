@@ -22,6 +22,11 @@ import { ShopComponent } from './shop/shop.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProdDetailsComponent } from './prod-details/prod-details.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { OrderModalComponent } from './order-modal/order-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
+import { UserAdminModalComponent } from './user-admin-modal/user-admin-modal.component';
 
 
 @NgModule({
@@ -43,7 +48,11 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     CartComponent,
     ShopComponent,
     ProdDetailsComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    AdminPageComponent,
+    OrderModalComponent,
+    DeleteConfirmComponent,
+    UserAdminModalComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +61,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
       clientId: 'kojDK0wosJzLUhZA5VGIxSPO3HB2JEmr'
     }),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

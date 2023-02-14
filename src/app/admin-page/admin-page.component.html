@@ -15,10 +15,10 @@
           <li class="nav-item w-100" role="presentation">
             <button class="btn  w-100 " id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true">All Users</button>
           </li>
-      <!--     <li class="nav-item w-100" role="presentation">
-            <button class="btn  w-100" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+       <li class="nav-item w-100" role="presentation">
+            <button class="btn  w-100" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button" role="tab" aria-controls="products" aria-selected="false">Products</button>
           </li>
-          <li class="nav-item w-100" role="presentation">
+      <!--        <li class="nav-item w-100" role="presentation">
             <button class="btn  w-100" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
           </li> -->
         </ul>
@@ -108,6 +108,40 @@
 
 
     <!--Main layout-->
+    </div>
+
+    <div class="tab-pane container ms-md-5 position-absolute start-50 translate-middle-x  " id="products" role="tabpanel" aria-labelledby="products-tab">
+      <br>
+      <br>
+  <div class="ms-md-5 ">
+    <div class="row ms-md-5 d-flex justify-content-center align-items-center">
+    <table class="table ms-md-5">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Category</th>
+          <th scope="col">Price</th>
+          <th scope="col">Old Price</th>
+          <th scope="col" class="d-grid gap-2 d-md-flex justify-content-md-end"><button class="btn btn-primary  btn-sm" (click)="openNewProductModal()" >New Product</button></th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of this.service.products">
+          <th scope="row"><a  routerLink="/adminPage"  (click)="openEditProductModal(product)"> {{product.id}}</a></th>
+          <td>{{product.name}}</td>
+          <td>{{product.categoryName}}</td>
+          <td>{{product.price}}</td>
+          <td>{{product.oldPrice}}</td>
+
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+    </div>
     </div>
 </div>
 

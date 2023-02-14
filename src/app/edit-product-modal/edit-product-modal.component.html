@@ -1,0 +1,196 @@
+<div class="modal-header bg-info">
+  <h4 class="modal-title">Edit Product</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="this.service.selectedProductEdit">
+  <table class="table">
+
+    <tbody>
+      <tr>
+        <th scope="row">Product Id</th>
+
+        <td scope="row">{{ this.service.selectedProductEdit.id }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Product Title</th>
+
+        <td>
+          <input type="text" [(ngModel)]="this.service.selectedProductEdit.name" />
+        </td>
+      </tr>
+     <!--   <tr>
+        <th scope="row">Password</th>
+
+        <td>
+          <input type="password" [value]="this.service.selectedProductEdit.password" />
+        </td>
+      </tr>-->
+      <tr>
+        <th scope="row">Product Category</th>
+
+        <td>
+
+          <div ngbDropdown class="d-inline-block">
+            <a routerLink="adminPage" id="dropdownMenuButton" ngbDropdownToggle> {{this.service.selectedProductEdit.categoryName}}</a>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+              <button ngbDropdownItem (click)="this.service.selectedProductEdit.categoryId=1;this.service.selectedProductEdit.categoryName='chairs'">chairs</button>
+              <button ngbDropdownItem  (click)="this.service.selectedProductEdit.categoryId=2;this.service.selectedProductEdit.categoryName='sofas'">sofas</button>
+              <button ngbDropdownItem (click)="this.service.selectedProductEdit.categoryId=3;this.service.selectedProductEdit.categoryName='lamps'">lamps</button>
+              <button ngbDropdownItem  (click)="this.service.selectedProductEdit.categoryId=4;this.service.selectedProductEdit.categoryName='tables'">tables</button>
+              <button ngbDropdownItem  (click)="this.service.selectedProductEdit.categoryId=5;this.service.selectedProductEdit.categoryName='monitors'">monitors</button>
+
+            </div>
+
+          </div>        </td>
+      </tr>
+      <tr>
+        <th scope="row">Product Price</th>
+
+        <td>
+          <input type="number" [(ngModel)]="this.service.selectedProductEdit.price" />
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Product Old Price</th>
+
+        <td>
+          <input type="number" [(ngModel)]="this.service.selectedProductEdit.oldPrice" />
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Description</th>
+        <td>
+          <textarea class="form-control"[(ngModel)]="this.service.selectedProductEdit.description" ></textarea>
+        </td>
+  <!--       <td>
+          <div ngbDropdown class="d-inline-block">
+            <a routerLink="adminPage" id="dropdownMenuButton" ngbDropdownToggle> {{this.service.selectedProductEdit.title}}</a>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+              <button ngbDropdownItem (click)="this.service.selectedProductEdit.title='notAdmin'">Not Admin</button>
+              <button ngbDropdownItem  (click)="this.service.selectedProductEdit.title='Admin'">Admin</button>            </div>
+          </div>
+        </td>-->
+      </tr>
+      <tr>
+        <th scope="row">Product Image1</th>
+
+        <td>
+          <img  [src]="this.service.selectedProductEdit.image" alt="No Image" style="width: 50%;" />
+        </td>
+        <td>
+          <input type="file" class="file-input"
+       (change)="onFileSelected($event,'image1',this.service.selectedProductEdit.id)" #fileUpload1>
+
+<div class="file-upload">
+
+   {{fileName1 || "Upload"}}
+
+    <button color="primary" class="upload-btn"
+      (click)="fileUpload1.click()">
+        <i>attach_file</i>
+    </button>
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+</div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Product Image2</th>
+
+        <td>
+          <img  [src]="this.service.selectedProductEdit.image2" alt="No Image" style="width: 50%;" />
+        </td>
+        <td>
+          <input type="file" class="file-input"
+       (change)="onFileSelected($event,'image2',this.service.selectedProductEdit.id)" #fileUpload2>
+
+<div class="file-upload">
+
+   {{fileName2 || "Upload"}}
+
+    <button color="primary" class="upload-btn"
+      (click)="fileUpload2.click()">
+        <i>attach_file</i>
+    </button>
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+</div>
+        </td>
+      </tr><tr>
+        <th scope="row">Product Image3</th>
+
+        <td>
+          <img  [src]="this.service.selectedProductEdit.image3" alt="No Image" style="width: 50%;" />
+        </td>
+        <td>
+          <input type="file" class="file-input"
+       (change)="onFileSelected($event,'image3',this.service.selectedProductEdit.id)" #fileUpload3>
+
+<div class="file-upload">
+
+   {{fileName3 || "Upload"}}
+
+    <button color="primary" class="upload-btn"
+      (click)="fileUpload3.click()">
+        <i>attach_file</i>
+    </button>
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+</div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Product Image4</th>
+
+        <td>
+          <img  [src]="this.service.selectedProductEdit.image4" alt="No Image" style="width: 50%;" />
+        </td>
+        <td>
+          <input type="file" class="file-input"
+       (change)="onFileSelected($event,'image4',this.service.selectedProductEdit.id)" #fileUpload4>
+
+<div class="file-upload">
+
+   {{fileName4 || "Upload"}}
+
+    <button color="primary" class="upload-btn"
+      (click)="fileUpload4.click()">
+        <i>attach_file</i>
+    </button>
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger" (click)="openDeleteProdModal()">Delete</button>
+
+
+  <button class="btn btn-primary" (click)="saveProduct()">Save</button>
+</div>

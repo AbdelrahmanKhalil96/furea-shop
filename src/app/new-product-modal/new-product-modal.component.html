@@ -1,0 +1,70 @@
+<div class="modal-header bg-info">
+  <h4 class="modal-title">Edit Product</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <table class="table">
+
+    <tbody>
+
+      <tr>
+        <th scope="row">Product Title</th>
+
+        <td>
+          <input type="text" [(ngModel)]="this.service.newProduct.name" />
+        </td>
+      </tr>
+
+      <tr>
+        <th scope="row">Product Category</th>
+
+        <td>
+
+          <div ngbDropdown class="d-inline-block">
+            <a routerLink="adminPage" id="dropdownMenuButton" ngbDropdownToggle> {{this.service.newProduct.categoryName}}</a>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+              <button ngbDropdownItem (click)="this.service.newProduct.categoryId=1;this.service.newProduct.categoryName='chairs'">chairs</button>
+              <button ngbDropdownItem  (click)="this.service.newProduct.categoryId=2;this.service.newProduct.categoryName='sofas'">sofas</button>
+              <button ngbDropdownItem (click)="this.service.newProduct.categoryId=3;this.service.newProduct.categoryName='lamps'">lamps</button>
+              <button ngbDropdownItem  (click)="this.service.newProduct.categoryId=4;this.service.newProduct.categoryName='tables'">tables</button>
+              <button ngbDropdownItem  (click)="this.service.newProduct.categoryId=5;this.service.newProduct.categoryName='monitors'">monitors</button>
+
+            </div>
+
+          </div>        </td>
+      </tr>
+      <tr>
+        <th scope="row">Product Price</th>
+
+        <td>
+          <input type="number" [(ngModel)]="this.service.newProduct.price" />
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Product Old Price</th>
+
+        <td>
+          <input type="number" [(ngModel)]="this.service.newProduct.oldPrice" />
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Description</th>
+        <td>
+          <textarea class="form-control"[(ngModel)]="this.service.newProduct.description" ></textarea>
+        </td>
+
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+
+
+  <button class="btn btn-primary" (click)="addProduct()">Save</button>
+</div>

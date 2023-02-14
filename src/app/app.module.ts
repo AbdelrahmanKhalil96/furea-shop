@@ -27,6 +27,10 @@ import { OrderModalComponent } from './order-modal/order-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 import { UserAdminModalComponent } from './user-admin-modal/user-admin-modal.component';
+import { EditProductModalComponent } from './edit-product-modal/edit-product-modal.component';
+import { FormsModule } from '@angular/forms';
+import { NewProductModalComponent } from './new-product-modal/new-product-modal.component';
+import { DeleteProdctConfirmComponent } from './delete-prodct-confirm/delete-prodct-confirm.component';
 
 
 @NgModule({
@@ -52,7 +56,11 @@ import { UserAdminModalComponent } from './user-admin-modal/user-admin-modal.com
     AdminPageComponent,
     OrderModalComponent,
     DeleteConfirmComponent,
-    UserAdminModalComponent
+    UserAdminModalComponent,
+    EditProductModalComponent,
+    NewProductModalComponent,
+    DeleteProdctConfirmComponent
+
   ],
   imports: [
     BrowserModule,
@@ -62,7 +70,8 @@ import { UserAdminModalComponent } from './user-admin-modal/user-admin-modal.com
     }),
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

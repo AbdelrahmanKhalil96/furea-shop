@@ -1,0 +1,14 @@
+<div class="modal-header bg-info">
+  <h4 class="modal-title">Delete Product</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+<h5>Are you sure you want To Delete The Product No. {{this.service.selectedProductEdit.id}}</h5>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger ms-auto " (click)="DeleteProd()" >Delete Order</button>
+
+
+</div>

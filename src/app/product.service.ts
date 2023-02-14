@@ -26,6 +26,8 @@ export class ProductService {
   errors = '';
   selectedAdminEdit: any = {};
   selectedUserEdit: any = {};
+  selectedProductEdit: any = {};
+  newProduct:any={};
   allUsers:any={}
 
   constructor(
@@ -47,7 +49,11 @@ getallUsersAdmin(){
             console.log(err);
           });
 }
+getEditedProductDetails(id:any){
 
+  this.selectedProductEdit=this.products.find(x => x.id == id)
+  console.log(this.selectedProductEdit)
+}
   saveEditedOrder(orderItems: any, order: any) {
     console.log('order is' + JSON.stringify(order));
     console.log('orderItems is' + JSON.stringify(orderItems));
@@ -98,6 +104,24 @@ getallUsersAdmin(){
         console.log(err);
       });
   }
+  addNewProduct(){
+
+    this.http
+    .post(this.url + 'api/Products'  , this.newProduct)
+    .toPromise()
+    .then((res) => {
+      this.errors = '';
+      console.log(res);
+      if(res!=null){
+        this.getAllProducts();
+      }
+    })
+    .catch((err) => {
+      this.errors = 'Database Error';
+      console.log(err);
+    });
+
+  }
   getAllProducts() {
     this.http
       .get(this.url + 'ProdSpecified')
@@ -105,7 +129,7 @@ getallUsersAdmin(){
       .then((res) => {
         this.products = res as Product[];
         this.errors = '';
-        //  console.log(this.products);
+         console.log(this.products);
       })
       .catch((err) => {
         this.errors = 'Database Error';
@@ -143,6 +167,20 @@ getallUsersAdmin(){
         console.log(err);
       });
   }
+  deleteProduct(ProdId: any) {
+    this.http
+      .delete(this.url + 'api/Products/' + parseInt(ProdId))
+      .toPromise()
+      .then((res) => {
+        this.errors = '';
+        console.log(res);
+        this.getAllProducts();
+      })
+      .catch((err) => {
+        this.errors = 'Database Error';
+        console.log(err);
+      });
+  }
   deleteOrder(orderID: any) {
     this.http
       .delete(this.url + 'api/Orders/' + parseInt(orderID))
@@ -157,7 +195,24 @@ getallUsersAdmin(){
         console.log(err);
       });
   }
+  saveEditedProduct(){
+    //console.log(this.selectedProductEdit)
 
+    this.http
+    .put(this.url + 'api/Products/' + this.selectedProductEdit.id, this.selectedProductEdit)
+    .toPromise()
+    .then((res) => {
+      this.errors = '';
+      console.log(res);
+      if(res==null){
+        this.getAllProducts();
+      }
+    })
+    .catch((err) => {
+      this.errors = 'Database Error';
+      console.log(err);
+    });
+  }
   saveEditedUser(){
     this.http
     .put(this.url + 'api/users/' + this.selectedUserEdit.id, this.selectedUserEdit)
@@ -278,11 +333,19 @@ getallUsersAdmin(){
     // console.log(this.loggedUser.id)
     //
     // console.log(this.cart)
-    if (this.cart.length > 0 && this.loggedUser.id != null) {
-      this.http
+    var finalCart:any=[]
+   this.cart.forEach((product:Product)=>{
+if(product.qty!=0){
+  finalCart.push(product)
+}
+})
+ if (finalCart.length > 0 && this.loggedUser.id != null) {
+
+console.log(finalCart)
+this.http
         .post(this.url + 'ProcessOrder', {
           userId: this.loggedUser.id,
-          products: this.cart,
+          products:finalCart,
         })
         .toPromise()
         .then((res: any) => {
@@ -294,7 +357,7 @@ getallUsersAdmin(){
             this.placed = true;
             console.log(this.placed);
             this.errors = '';
-            setTimeout(() => {}, 100);
+            setTimeout(() => {}, 200);
             setTimeout(() => {
               this.placed = false;
               console.log(this.placed);

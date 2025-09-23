@@ -1,27 +1,28 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
-test('has title', async ({ page }) => {
+test('has correct page title', async ({ page }) => {
   await page.goto('/');
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Learn Jenkins/);
+  // Check that the page title contains 'FureaShop'
+  await expect(page).toHaveTitle(/FureaShop/);
 });
 
-test('has Jenkins in the body', async ({ page }) => {
+test('home page displays main heading', async ({ page }) => {
   await page.goto('/');
 
-  const isVisible = await page.locator('a:has-text("Learn Jenkins on Udemy")').isVisible();
-  expect(isVisible).toBeTruthy();
+  // Example: Look for an <h1> containing "Welcome" or "FureaShop"
+  // Replace this with your actual visible text or element selector
+  const heading = await page.locator('h1, h2, h3').filter({ hasText: /Welcome|FureaShop/i }).first();
+  await expect(heading).toBeVisible();
 });
 
-test('has expected app version', async ({ page }) => {
+test('displays application version if available', async ({ page }) => {
   await page.goto('/');
 
-  const expectedAppVersion = process.env.REACT_APP_VERSION ? process.env.REACT_APP_VERSION : '1';
+  // Assuming your app shows version in a <p> or some text somewhere
+  const expectedAppVersion = process.env.APP_VERSION || '1.0.0';
 
-  console.log(expectedAppVersion);
-
-  const isVisible = await page.locator(`p:has-text("Application version: ${expectedAppVersion}")`).isVisible();
-  expect(isVisible).toBeTruthy();
+  const versionVisible = await page.locator(`text=Application version: ${expectedAppVersion}`).first();
+  await expect(versionVisible).toBeVisible();
 });

@@ -8,4 +8,5 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class AppComponent {
   isAuth0Loading$ = this.authService.isLoading$;
+    title = 'furea-shop';
   constructor(private authService: AuthService) {}}

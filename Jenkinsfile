@@ -38,8 +38,6 @@ environment{
 
                     steps {
                         sh '''
-                            npm install -D @playwright/test
-                            npx playwright install --with-deps
                             npm install serve
                             node_modules/.bin/serve -s build &
                             sleep 10

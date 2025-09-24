@@ -1,29 +1,45 @@
-# FureaShop
+# Furea Shop CI/CD with Jenkins & Netlify
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.1.
+This project demonstrates a CI/CD pipeline for the **Furea Shop** Angular application.  
+The pipeline is fully automated with **build, test, and deploy stages**, ensuring quality before release.
 
-## Development server
+## Pipeline Overview
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. **Build**
+   - Runs inside a Node.js Docker container.
+   - Installs dependencies with `npm ci`.
+   - Builds Angular app into `dist/furea-shop`.
 
-## Code scaffolding
+2. **Test**
+   - Uses Microsoft Playwright Docker image.
+   - Runs end-to-end (E2E) Playwright tests.
+   - Generates HTML test reports in Jenkins.
+   - ❌ If tests fail, the pipeline stops (no deployment).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+3. **Deploy**
+   - Uses Netlify CLI inside Docker.
+   - Deploys `dist/furea-shop` to Netlify production.
+   - Requires Jenkins credentials for `NETLIFY_AUTH_TOKEN`.
 
-## Build
+## How to Run Locally
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+# Clone repo
+git clone https://github.com/AbdelrahmanKhalil96/furea-shop.git
+cd furea-shop
 
-## Running unit tests
+# Install dependencies
+npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Run development server
+npm start
 
-## Running end-to-end tests
+# Run tests
+npx playwright test --reporter=html
+CI/CD Architecture
+The pipeline runs as follows:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+GitHub → Jenkins (Build → Test → Deploy) → Netlify → Live App
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-All Rights Reserved To risingtheme.com
+yaml
+Copy code

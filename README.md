@@ -5,6 +5,8 @@ The pipeline is fully automated with **build, test, and deploy stages**, ensurin
 
 ## Pipeline Overview
 
+<img width="661" height="249" alt="image" src="https://github.com/user-attachments/assets/2b29243f-d947-4189-8d76-cfd554492c7f" />
+
 1. **Build**
    - Runs inside a Node.js Docker container.
    - Installs dependencies with `npm ci`.
@@ -34,12 +36,8 @@ npm install
 # Run development server
 npm start
 
+The app will be available at:
+👉 http://localhost:3000
+
 # Run tests
 npx playwright test --reporter=html
-CI/CD Architecture
-The pipeline runs as follows:
-
-GitHub → Jenkins (Build → Test → Deploy) → Netlify → Live App
-
-yaml
-Copy code

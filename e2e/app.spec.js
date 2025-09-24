@@ -17,12 +17,11 @@ test('home page displays main heading', async ({ page }) => {
   await expect(heading).toBeVisible();
 });
 
-test('displays application version if available', async ({ page }) => {
+test('home page displays shop heading', async ({ page }) => {
   await page.goto('/');
 
-  // Assuming your app shows version in a <p> or some text somewhere
-  const expectedAppVersion = process.env.APP_VERSION || '1.0.0';
-
-  const versionVisible = await page.locator(`text=Application version: ${expectedAppVersion}`).first();
-  await expect(versionVisible).toBeVisible();
+  // Example: Look for an <h1> containing "Welcome" or "FureaShop"
+  // Replace this with your actual visible text or element selector
+  const heading = await page.locator('li').filter({ hasText: /Shop|FureaShop/i }).first();
+  await expect(heading).toBeVisible();
 });

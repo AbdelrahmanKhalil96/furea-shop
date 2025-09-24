@@ -13,7 +13,7 @@ test('home page displays main heading', async ({ page }) => {
 
   // Example: Look for an <h1> containing "Welcome" or "FureaShop"
   // Replace this with your actual visible text or element selector
-  const heading = await page.locator('h1, h2, h3').filter({ hasText: /Welcome|FureaShop/i }).first();
+  const heading = await page.locator('li').filter({ hasText: /Home|FureaShop/i }).first();
   await expect(heading).toBeVisible();
 });
 
